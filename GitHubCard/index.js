@@ -3,6 +3,17 @@
            https://api.github.com/users/<your name>
 */
 
+  axios
+    .get('https://api.github.com/users/SMoore3773')
+    .then(response => {
+        response.data.message.forEach(url => {
+        const newCard = cardMaker(url)
+        entryPointINHTML.appendChild(newCard);
+    });})
+
+    .catch(error => {
+      console.log('error');
+    });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -46,10 +57,62 @@ const followersArray = [];
 
 */
 
-/* List of LS Instructors Github username's: 
-  tetondan
-  dustinmyers
-  justsml
-  luishrd
-  bigknell
-*/
+function cardMaker(obj){
+
+  //defining card elements
+  const card = document.createElement('div');
+  const cardImgUser = document.createElement('img');
+  const cardInf = document.createElement('div');
+  const cardName = document.createElement('h3');
+  const cardUserName = document.createElement('p');
+  const cardLoc = document.createElement('p');
+  const cardProf = document.createElement('p');
+  const cardProfLnk = document.createElement('a');
+  const cardFollowersCt = document.createElement('p');
+  const cardFollowingCt = document.createElement('p');
+  const cardBio = document.createElement('p');
+
+  //creating structure for elements
+  card.append(cardImgUser);
+  card.append(cardInf);
+  cardInf.append(cardName);
+  cardInf.append(cardUserName);
+  cardInf.append(cardLoc);
+  cardInf.append(cardProf);
+  cardProf.append(cardProfLnk);
+  cardInf.append(cardFollowersCt);
+  cardInf.append(cardFollowingCt);
+  cardInf.append(cardBio);
+
+  //adding classes to elements
+  card.classList.add('card');
+  cardInf.classList.add('card-info');
+  cardName.classList.add('name');
+  cardUserName.classList.add('username');
+
+  //adding content to the elements
+  cardName.textContent = obj.data.name;
+  cardImgUser.src = obj.data.avatar_url;
+  cardName.textContent = obj.data.name;
+  cardUserName.textContent = obj.data.login;
+  cardLoc.textContent = obj.data.location;
+  cardProf.textContent = 'Profile:';
+  cardProfLnk.textContent = obj.data.html_url;
+  cardProfLnk.href = obj.data.html_url;
+  cardFollowersCt.textContent = `Followers: ${obj.data.followers}`;
+  cardFollowingCt.textContent = `Following: ${obj.data.following}`;
+  cardBio.textContent = obj.data.bio;
+
+
+
+return card;
+}
+
+
+// List of LS Instructors Github username's: 
+//   tetondan
+//   dustinmyers
+//   justsml
+//   luishrd
+//   bigknell
+
