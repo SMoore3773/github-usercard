@@ -21,39 +21,39 @@
   })
    
     
-    const data = {
-      login: "SMoore3773",
-      id: 52682117,
-      node_id: "MDQ6VXNlcjUyNjgyMTE3",
-      avatar_url: "https://avatars2.githubusercontent.com/u/52682117?v=4",
-      gravatar_id: "",
-      url: "https://api.github.com/users/SMoore3773",
-      html_url: "https://github.com/SMoore3773",
-      followers_url: "https://api.github.com/users/SMoore3773/followers",
-      following_url: "https://api.github.com/users/SMoore3773/following{/other_user}",
-      gists_url: "https://api.github.com/users/SMoore3773/gists{/gist_id}",
-      starred_url: "https://api.github.com/users/SMoore3773/starred{/owner}{/repo}",
-      subscriptions_url: "https://api.github.com/users/SMoore3773/subscriptions",
-      organizations_url: "https://api.github.com/users/SMoore3773/orgs",
-      repos_url: "https://api.github.com/users/SMoore3773/repos",
-      events_url: "https://api.github.com/users/SMoore3773/events{/privacy}",
-      received_events_url: "https://api.github.com/users/SMoore3773/received_events",
-      type: "User",
-      site_admin: false,
-      name: "Sam Moore",
-      company: null,
-      blog: "",
-      location: "Maryland",
-      email: null,
-      hireable: null,
-      bio: "Aspiring full stack web developer with backgrounds ranging from public health to fine art and sculpture.",
-      public_repos: 21,
-      public_gists: 0,
-      followers: 2,
-      following: 3,
-      created_at: "2019-07-08T23:48:02Z",
-      updated_at: "2020-01-24T04:22:19Z",
-    };
+    // const data = {
+    //   login: "SMoore3773",
+    //   id: 52682117,
+    //   node_id: "MDQ6VXNlcjUyNjgyMTE3",
+    //   avatar_url: "https://avatars2.githubusercontent.com/u/52682117?v=4",
+    //   gravatar_id: "",
+    //   url: "https://api.github.com/users/SMoore3773",
+    //   html_url: "https://github.com/SMoore3773",
+    //   followers_url: "https://api.github.com/users/SMoore3773/followers",
+    //   following_url: "https://api.github.com/users/SMoore3773/following{/other_user}",
+    //   gists_url: "https://api.github.com/users/SMoore3773/gists{/gist_id}",
+    //   starred_url: "https://api.github.com/users/SMoore3773/starred{/owner}{/repo}",
+    //   subscriptions_url: "https://api.github.com/users/SMoore3773/subscriptions",
+    //   organizations_url: "https://api.github.com/users/SMoore3773/orgs",
+    //   repos_url: "https://api.github.com/users/SMoore3773/repos",
+    //   events_url: "https://api.github.com/users/SMoore3773/events{/privacy}",
+    //   received_events_url: "https://api.github.com/users/SMoore3773/received_events",
+    //   type: "User",
+    //   site_admin: false,
+    //   name: "Sam Moore",
+    //   company: null,
+    //   blog: "",
+    //   location: "Maryland",
+    //   email: null,
+    //   hireable: null,
+    //   bio: "Aspiring full stack web developer with backgrounds ranging from public health to fine art and sculpture.",
+    //   public_repos: 21,
+    //   public_gists: 0,
+    //   followers: 2,
+    //   following: 3,
+    //   created_at: "2019-07-08T23:48:02Z",
+    //   updated_at: "2020-01-24T04:22:19Z",
+    // };
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -76,6 +76,7 @@
 */
 
 const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
 followersArray.forEach(name => {
   axios
   .get(`https://api.github.com/users/${name}`)
@@ -126,14 +127,16 @@ function cardMaker(obj){
   //creating structure for elements
   card.appendChild(cardImgUser);
   card.appendChild(cardInf);
+
   cardInf.appendChild(cardName);
   cardInf.appendChild(cardUserName);
   cardInf.appendChild(cardLoc);
   cardInf.appendChild(cardProf);
-  cardInf.appendChild(cardProfLnk);
   cardInf.appendChild(cardFollowersCt);
   cardInf.appendChild(cardFollowingCt);
   cardInf.appendChild(cardBio);
+
+  cardProf.appendChild(cardProfLnk);
 
   //adding classes to elements
   card.classList.add('card');
@@ -159,8 +162,8 @@ function cardMaker(obj){
   cardName.textContent = obj.name;
   cardUserName.textContent = obj.login;
   cardLoc.textContent = obj.location;
-  cardProf.textContent = 'Profile:';
-  cardProfLnk.textContent = obj.html_url;
+  
+  cardProfLnk.textContent = `${obj.name}'s Git Hub`;
   cardProfLnk.href = obj.html_url;
   cardFollowersCt.textContent = `Followers: ${obj.followers}`;
   cardFollowingCt.textContent = `Following: ${obj.following}`;
